@@ -28,3 +28,56 @@ class Baraja:
         carta.tapada = tapada
         return carta
 
+
+class Mano:
+    def __init__(self):
+        self.cartas = []
+
+    def recibir_carta(self, carta):
+        self.cartas.append(carta)
+
+    def calcular_valor(self):
+        valor = sum([10 if carta.valor in ['J', 'Q', 'K'] else int(carta.valor) for carta in self.cartas])
+        ases = [carta for carta in self.cartas if carta.valor == 'A']
+        for _ in ases:
+            if valor > 21:
+                valor -= 10
+        return valor
+
+
+class Blackjack:
+    def __init__(self):
+        self.jugador = None
+        self.fichas = 0
+        self.baraja = None
+
+    def registrar_jugador(self, nombre):
+        self.jugador = nombre
+        self.fichas = 100
+        self.baraja = Baraja()
+
+    def iniciar_juego(self, apuesta):
+        self.fichas -= apuesta
+        self.baraja.revolver()
+
+        mano_jugador = Mano()
+        mano_casa = Mano()
+
+        if mano_jugador.calcular_valor() == 21:
+            print('¡Blackjack! Ganaste la mano.')
+            self.fichas += apuesta * 2
+            self.menu()
+        else:
+            self.hacer_jugada_jugador(mano_jugador, mano_casa, apuesta)
+
+    def hacer_jugada_jugador(self, mano_jugador, mano_casa, apuesta):
+
+    def hacer_jugada_casa(self, mano_jugador, mano_casa, apuesta):
+        mano_casa.cartas[1].tapada = False
+
+
+    def mostrar_mano(self, nombre, cartas):
+        pass
+
+
+
