@@ -13,3 +13,18 @@ class Carta:
         else:
             return f'{self.valor} de {self.pinta}'
 
+
+class Baraja:
+    def __init__(self):
+        self.cartas = []
+        self.revolver()
+
+    def revolver(self):
+        pintas = ['CORAZÓN', 'TRÉBOL', 'DIAMANTE', 'ESPADA']
+        valores = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+
+    def repartir_carta(self, tapada: bool) -> Carta:
+        carta = self.cartas.pop()
+        carta.tapada = tapada
+        return carta
+
